@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  label.required {
+    @apply before:text-red-600 before:content-['*'] before:mr-1;
+  }
+
+  .form-input {
+    @apply p-1 border bg-gray-100 disabled:opacity-50;
+  }
+
+  .heading {
+    @apply font-bold text-2xl mb-4 text-center;
+  }
+}
