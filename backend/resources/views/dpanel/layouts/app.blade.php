@@ -42,6 +42,10 @@
             url="{{ route(config('dpanel.prefix') . '.category.index') }}"
             isActive="{{ request()->segment(2) == 'category' }}" />
 
+        <x-dpanel::sidebar.item name="Campaigns" icon="bx-donate-heart"
+            url="{{ route(config('dpanel.prefix') . '.campaign.index') }}"
+            isActive="{{ request()->segment(2) == 'campaign' }}" />
+
         {{-- Global Settings Menu --}}
         @if (Schema::hasTable('global_settings'))
             <x-dpanel::sidebar.item name="Global Settings" icon="bx-cog"
