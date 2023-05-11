@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Campaign;
 use App\Http\Requests\StoreCampaignRequest;
 use App\Http\Requests\UpdateCampaignRequest;
+use App\Models\Category;
 
 class CampaignController extends Controller
 {
@@ -14,7 +15,7 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::paginate(10);
+        $campaigns = Campaign::with('category')->paginate(10);
 
         return view('dpanel.campaign.index', compact('campaigns'));
     }
@@ -24,7 +25,9 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name', 'asc')->get();
+
+        return view('dpanel.campaign.create', compact('categories'));
     }
 
     /**
@@ -32,7 +35,9 @@ class CampaignController extends Controller
      */
     public function store(StoreCampaignRequest $request)
     {
-        //
+        Campaign::create($request->validated());
+
+        return redirect()->route('dpanel.campaign.index')->withSuccess('New Campaign Added Successfully.');
     }
 
     /**

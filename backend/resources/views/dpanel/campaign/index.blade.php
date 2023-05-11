@@ -48,9 +48,9 @@
                         {{ $campaigns->perPage() * ($campaigns->currentPage() - 1) + $loop->iteration }}
                     </td>
                     <td class="pl-3 py-2" onclick="getRaiseFundList('{{ $item->slug }}', '{{ $item->name }}')">
-                        <img class="w-36 md:w-24 rounded"
+                        {{-- <img class="w-36 md:w-24 rounded"
                             src="{{ $item->images->isNotEmpty() ? $item->images[0]->original_url : 'https://placehold.jp/600x400.png?text=No%20Image' }}"
-                            alt="">
+                            alt=""> --}}
                     </td>
                     <td class="pl-3 py-2">{{ $item->category->name }}</td>
                     <td class="pl-3 py-2" onclick="getRaiseFundList('{{ $item->slug }}', '{{ $item->name }}')">
