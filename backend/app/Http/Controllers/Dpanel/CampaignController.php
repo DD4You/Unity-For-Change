@@ -15,7 +15,7 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::with('category')->paginate(10);
+        $campaigns = Campaign::with('category', 'images')->paginate(10);
 
         return view('dpanel.campaign.index', compact('campaigns'));
     }
@@ -53,7 +53,11 @@ class CampaignController extends Controller
      */
     public function edit(Campaign $campaign)
     {
-        //
+        $categories = Category::orderBy('name', 'asc')->get();
+
+        $campaign->loadMedia('campaign-images');
+
+        return view('dpanel.campaign.edit', compact('categories', 'campaign'));
     }
 
     /**
