@@ -37,6 +37,11 @@ class Campaign extends Model implements HasMedia
         );
     }
 
+    public function scopeActive($query)
+    {
+        $query->where('is_active', true);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
