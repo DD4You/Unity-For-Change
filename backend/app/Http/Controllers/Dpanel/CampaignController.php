@@ -45,7 +45,13 @@ class CampaignController extends Controller
      */
     public function show(Campaign $campaign)
     {
-        //
+        $raisedFunds = RaiseFund::with('campaign:id,name')
+            ->where('campaign_id', $campaign->id)
+            ->where('status', RaiseFundStatus::SUCCESS)
+            ->select('id', 'campaign_id', 'name', 'email', 'phone', 'amount', 'created_at')
+            ->get();
+
+        return response($raisedFunds);
     }
 
     /**
@@ -65,14 +71,16 @@ class CampaignController extends Controller
      */
     public function update(UpdateCampaignRequest $request, Campaign $campaign)
     {
-        //
+        $campaign->update($request->validated());
+
+        return redirect()->route('dpanel.campaign.index')->withSuccess('Campaign Updated Successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Campaign $campaign)
+
+    public function updateStatus(Campaign $campaign, $status)
     {
-        //
+        $campaign->update(['is_active' => $status]);
+
+        return back()->withSuccess('Status change successfully');
     }
 }

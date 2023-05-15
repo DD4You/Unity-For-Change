@@ -11,7 +11,7 @@ class UpdateCampaignRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateCampaignRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_id' => 'required',
+            'name' => 'required|max:150|unique:campaigns,name,' . request()->route('campaign')->id,
+            'goal' => 'required',
+            'description' => 'required'
         ];
     }
 }
