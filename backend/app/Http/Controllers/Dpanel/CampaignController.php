@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Dpanel;
 
+use App\Enums\RaiseFundStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Campaign;
 use App\Http\Requests\StoreCampaignRequest;
 use App\Http\Requests\UpdateCampaignRequest;
 use App\Models\Category;
+use App\Models\RaiseFund;
 
 class CampaignController extends Controller
 {
@@ -15,7 +17,13 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::with('category', 'images')->paginate(10);
+        $campaigns = Campaign::with('category', 'images')
+            ->withSum(
+                ['raiseFunds' => fn ($q) => $q->where('status', RaiseFundStatus::SUCCESS)],
+                'amount'
+            )
+            ->latest()
+            ->paginate(10);
 
         return view('dpanel.campaign.index', compact('campaigns'));
     }
