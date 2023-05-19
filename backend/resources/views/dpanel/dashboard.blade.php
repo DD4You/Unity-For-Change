@@ -76,24 +76,24 @@
             </x-slot:thead>
 
             <x-slot:tbody>
-                @foreach (range(1, 10) as $item)
+                @foreach ($raiseFund as $item)
                     <tr>
                         <td class="pl-3 py-2">
-                            {{ $loop->iteration }}
+                            {{ $raiseFund->perPage() * ($raiseFund->currentPage() - 1) + $loop->iteration }}
                         </td>
-                        <td class="pl-3 py-2">Vinay</td>
-                        <td class="pl-3 py-2">Rajput</td>
-                        <td class="pl-3 py-2">70079XXXXX</td>
-                        <td class="pl-3 py-2">vinay@dd4you.in</td>
-                        <td class="pl-3 py-2">01-01-2000</td>
-                        <td class="pl-3 py-2">HN, City, State, India, (Pincode)</td>
+                        <td class="pl-3 py-2">{{ $item->campaign->name }}</td>
+                        <td class="pl-3 py-2">{{ $item->name }}</td>
+                        <td class="pl-3 py-2">{{ $item->phone }}</td>
+                        <td class="pl-3 py-2">{{ $item->email }}</td>
+                        <td class="pl-3 py-2">{{ $item->amount }}</td>
+                        <td class="pl-3 py-2">{{ $item->created_at->format('d-m-Y') }}</td>
                     </tr>
                 @endforeach
 
             </x-slot:tbody>
 
             <x-slot:pagination>
-                {{-- Pagination --}}
+                {{ $raiseFund->links('dpanel.layouts.pagination') }}
             </x-slot:pagination>
         </x-dpanel::table>
     </section>
