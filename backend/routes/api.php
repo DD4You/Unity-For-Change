@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CampaignController;
+use App\Http\Controllers\Api\V1\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('payment/status/{id}', [PaymentController::class, 'status'])->name('api.payment.status');
+Route::post('payment/{campaign}', [PaymentController::class, 'payment']);
+Route::apiResource('campaigns', CampaignController::class)->only('index', 'show');

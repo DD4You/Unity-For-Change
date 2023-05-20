@@ -21,7 +21,7 @@ enum RaiseFundStatus: int
         return $this === self::SUCCESS;
     }
 
-    public function getStatus($status): RaiseFundStatus
+    public static function getStatus($status): RaiseFundStatus
     {
         return match ($status) {
             'failure' => self::FAILURE,
