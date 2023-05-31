@@ -28,8 +28,8 @@ class CampaignResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'goal' => $this->goal,
-            'raise_funds_sum_amount' => $this->raise_funds_sum_amount,
-            'category_name' => $this->category_name,
+            'raise_funds_sum_amount' => $this->raise_funds_sum_amount ?? 0,
+            'category_name' => $this->category->name,
             'images' => $images,
         ];
     }
