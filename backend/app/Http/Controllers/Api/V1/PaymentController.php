@@ -46,10 +46,13 @@ class PaymentController extends Controller
         return $this->responseOk($data);
     }
 
-    public function status(Request $request, $id)
+    public function status(Request $request, $slug)
     {
+
+        $campaign = Campaign::where('slug', $slug)->first();
+
         RaiseFund::create([
-            'campaign_id' => $id,
+            'campaign_id' => $campaign->id,
             'name' => $request->firstname,
             'email' => $request->email,
             'phone' => $request->phone,

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->unsignedBigInteger('amount');
-            $table->string('txtid')->nullable();
+            $table->string('txnid')->nullable();
             $table->tinyInteger('status');
             $table->timestamps();
         });
